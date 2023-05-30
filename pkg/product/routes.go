@@ -7,14 +7,6 @@ import (
 	"github.com/uyabpras/go-grpc-api-gateway/pkg/product/routes"
 )
 
-func (svc *ServiceClient) CreateProduct(ctx *gin.Context) {
-	routes.CreateProduct(ctx, svc.Client)
-}
-
-func (svc *ServiceClient) FindOne(ctx *gin.Context) {
-	routes.FindOne(ctx, svc.Client)
-}
-
 func RegisterRoutes(r *gin.Engine, c *config.Config, authsvc *auth.ServiceClient) {
 	a := auth.InitAuthMiddleware(authsvc)
 
@@ -26,4 +18,12 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authsvc *auth.ServiceClient
 	routes.Use(a.Authrequired)
 	routes.POST("/", svc.CreateProduct)
 	routes.GET("/:id", svc.FindOne)
+}
+
+func (svc *ServiceClient) CreateProduct(ctx *gin.Context) {
+	routes.CreateProduct(ctx, svc.Client)
+}
+
+func (svc *ServiceClient) FindOne(ctx *gin.Context) {
+	routes.FindOne(ctx, svc.Client)
 }
