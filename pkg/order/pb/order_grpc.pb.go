@@ -43,21 +43,19 @@ func (c *orderServiceClient) CreateOrder(ctx context.Context, in *CreateOrderReq
 }
 
 // OrderServiceServer is the server API for OrderService service.
-// All implementations must embed UnimplementedOrderServiceServer
+// All implementations should embed UnimplementedOrderServiceServer
 // for forward compatibility
 type OrderServiceServer interface {
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
-	mustEmbedUnimplementedOrderServiceServer()
 }
 
-// UnimplementedOrderServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedOrderServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedOrderServiceServer struct {
 }
 
 func (UnimplementedOrderServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
 }
-func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
 // UnsafeOrderServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to OrderServiceServer will

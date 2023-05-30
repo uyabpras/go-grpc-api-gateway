@@ -20,5 +20,5 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authsvc *auth.ServiceClient
 
 	routes := r.Group("/order")
 	routes.Use(a.Authrequired)
-	routes.POST("/order", svc.CreateOrder)
+	routes.POST("/", svc.CreateOrder)
 }

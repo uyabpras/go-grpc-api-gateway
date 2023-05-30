@@ -43,3 +43,13 @@ message ValidateResponse{
     string error = 2;
     int64 userID = 3;
 }
+
+curl --request POST \
+  --url http://localhost:3000/product \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY4ODgwMjIsImlzcyI6ImdvLWdycGMtYXV0aC1zdmMiLCJJRCI6MSwiRW1haWwiOiJlbG9uQG11c2suY29tIn0.UtkfQ8caw6wpRDAAS8X8IeuIbfTEcaqdrHjExoICjoE' \
+  --header 'Content-Type: application/json' \
+  --data '{
+ "name": "Product A",
+ "stock": 5,
+ "price": 15
+}'

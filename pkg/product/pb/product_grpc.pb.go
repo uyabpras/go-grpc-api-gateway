@@ -63,16 +63,15 @@ func (c *productServiceClient) DecreaseStock(ctx context.Context, in *DecreaseSt
 }
 
 // ProductServiceServer is the server API for ProductService service.
-// All implementations must embed UnimplementedProductServiceServer
+// All implementations should embed UnimplementedProductServiceServer
 // for forward compatibility
 type ProductServiceServer interface {
 	CreateProduct(context.Context, *CreateProductRequest) (*CreateProductResponse, error)
 	FindOne(context.Context, *FindOneRequest) (*FindOneResponse, error)
 	DecreaseStock(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error)
-	mustEmbedUnimplementedProductServiceServer()
 }
 
-// UnimplementedProductServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedProductServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedProductServiceServer struct {
 }
 
@@ -85,7 +84,6 @@ func (UnimplementedProductServiceServer) FindOne(context.Context, *FindOneReques
 func (UnimplementedProductServiceServer) DecreaseStock(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DecreaseStock not implemented")
 }
-func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 
 // UnsafeProductServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to ProductServiceServer will
