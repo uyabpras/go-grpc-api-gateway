@@ -2,6 +2,7 @@ package routes
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -58,16 +59,13 @@ func FindOne(ctx *gin.Context, c pb.ProductServiceClient) {
 }
 
 func ListProduct(ctx *gin.Context, c pb.ProductServiceClient) {
-	body := PaginationsRequestBody{}
+	page, _ := strconv.ParseInt(ctx.Query("page"), 10, 64)
+	limit, _ := strconv.ParseInt(ctx.Query("limit"), 10, 64)
 
-	if err := ctx.BindJSON(&body); err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
-		return
-	}
-
+	fmt.Println(page, limit)
 	res, err := c.ListProduk(context.Background(), &pb.ListproductsRequest{
-		Page:  body.Page,
-		Limit: body.Limit,
+		Page:  page,
+		Limit: limit,
 	})
 
 	if err != nil {
